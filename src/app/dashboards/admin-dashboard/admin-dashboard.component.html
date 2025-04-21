@@ -1,0 +1,36 @@
+
+
+   <div class="dashboard-wrapper">
+    <aside class="sidebar">
+      <h2>Admin Dashboard</h2>
+      <ul>
+        <li (click)="selectView('create-user')">Create User</li>
+        <li (click)="selectView('create-farmer')">Farmers</li>
+        <li (click)="selectView('create-farm')">Farms</li>
+        <li (click)="selectView('create-fertilizer')">Fertilizers</li>
+        <li (click)="selectView('create-schedule')">Schedules</li>
+        <li (click)="logout()">Logout</li>
+        <!-- <li (click)="selectView('view-farmers')">View Farmers</li>
+        <li (click)="selectView('view-fertilizers')">View Fertilizers</li> -->
+      </ul>
+    </aside>
+  
+    <main class="content">
+      <ng-container [ngSwitch]="selectedView">
+  
+        <!-- <app-user-form *ngSwitchCase="'create-user'"></app-user-form> -->
+        
+          <app-user-form *ngSwitchCase="'create-user'"></app-user-form>
+        
+        <app-farmers *ngSwitchCase="'create-farmer'">Farmer Form Component will go here</app-farmers>
+        <app-farms *ngSwitchCase="'create-farm'">Farm Form Component will go here</app-farms>
+        <app-fertilizer *ngSwitchCase="'create-fertilizer'">Fertilizer Form Component will go here</app-fertilizer>
+        <app-schedules *ngSwitchCase="'create-schedule'">Schedule Form Component will go here</app-schedules>
+        <!-- <p *ngSwitchCase="'view-farmers'">Farmer List Component will go here</p>
+        <p *ngSwitchCase="'view-fertilizers'">Fertilizer List Component will go here</p> -->
+  
+        <p *ngSwitchDefault>Welcome to Admin Dashboard!</p>
+      </ng-container>
+    </main>
+  </div>
+  

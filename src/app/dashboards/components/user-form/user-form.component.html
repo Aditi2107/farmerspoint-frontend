@@ -1,0 +1,29 @@
+
+  <div class="form-wrapper">
+    <div class="form-card">
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-content">
+        <h2>Create User</h2>
+  
+        <label for="name">Name</label>
+        <input id="name" formControlName="name" type="text" />
+  
+        <label for="phonenumber">Phone</label>
+        <input id="phone" formControlName="phonenumber" type="text" />
+  
+        <!-- <label for="role">Role</label>
+        <select id="role" formControlName="role">
+          <option value="">Select Role</option>
+          <option value="admin">Admin</option>
+          <option value="superuser">Superuser</option>
+          <option value="user">User</option>
+        </select> -->
+  
+        <label for="password_hash">Password</label>
+        <input id="password" formControlName="password_hash" type="password" />
+  
+        <button type="submit" [disabled]="userForm.invalid">Submit</button>
+      </form>
+    </div>
+  </div>
+  
+  

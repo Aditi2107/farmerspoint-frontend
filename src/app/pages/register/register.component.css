@@ -1,0 +1,98 @@
+.register-wrapper {
+    display: flex;
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .register-left {
+    flex: 1;
+    background-color: #e8f5e9;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    color: #2e7d32;
+  }
+  
+  .register-left .app-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .register-left .app-description {
+    font-size: 18px;
+    margin-bottom: 40px;
+    max-width: 400px;
+  }
+  
+  .register-left img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    margin-top: 30px;
+  }
+  
+  .register-right {
+    flex: 1;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .register-right h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+  }
+  
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+  
+  .register-button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .register-button:hover {
+    background-color: #1b5e20;
+  }
+  
+  .redirect-link {
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  
+  .text-button {
+    background: none;
+    border: none;
+    color: #2e7d32;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  

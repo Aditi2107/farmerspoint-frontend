@@ -1,0 +1,110 @@
+.farmers-container {
+    padding: 24px;
+    background-color: #f4f6f9;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  }
+  .action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1rem;
+  }
+  
+  
+  .title {
+    font-size: 24px;
+    margin-bottom: 16px;
+    color:green;
+  }
+  
+  .create-btn {
+    margin-bottom: 20px;
+    width: 20%;
+    padding: 0.9rem;
+    background-color: #2e7d32;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 1rem;
+  }
+
+  .crop-btn {
+    margin-bottom: 20px;
+    margin-left: 20px;
+
+    width: 25%;
+    padding: 0.9rem;
+    background-color: #2e7d32;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 1rem;
+  }
+  .all-btn {
+    margin-bottom: 20px;
+    margin-left: 20px;
+
+    width: 25%;
+    padding: 0.9rem;
+    background-color: #2e7d32;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 1rem;
+  }
+
+  .submit-btn {
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 0.9rem;
+    background-color: #2e7d32;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 1rem;
+  }
+  
+  .form-popup {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+  }
+  
+  .form-popup form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .farmers-table {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .no-data {
+    margin-top: 20px;
+    font-style: italic;
+    color: #888;
+  }
+  .clickable-row {
+    cursor: pointer;
+    
+  }
+  .clickable-row:hover {
+    cursor: pointer;
+    color:green;
+  }

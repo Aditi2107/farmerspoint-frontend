@@ -1,0 +1,20 @@
+<!-- <p>admin-form works!</p> -->
+<div class="form-wrapper">
+    <div class="form-card">
+      <form [formGroup]="adminForm" (ngSubmit)="onSubmit()" class="form-content">
+        <h2>Create Admin</h2>
+  
+        <label for="name">Name</label>
+        <input id="name" formControlName="name" type="text" />
+  
+        <label for="phonenumber">Phone</label>
+        <input id="phone" formControlName="phonenumber" type="text" />
+  
+        <label for="password_hash">Password</label>
+        <input id="password" formControlName="password_hash" type="password" />
+  
+        <button type="submit" [disabled]="adminForm.invalid">Submit</button>
+      </form>
+    </div>
+  </div>
+  
