@@ -32,12 +32,35 @@
       <form class="form" [formGroup]="scheduleForm" (ngSubmit)="onCreateSchedule()" >
         <mat-form-field appearance="fill">
           <mat-label>Days After Sowing</mat-label>
-          <input matInput formControlName="days_after_sowing" />
+          <input matInput formControlName="days_after_sowing"   placeholder="Enter No of days" 
+          />
+          <mat-error *ngIf="daysAfterSowing?.invalid && daysAfterSowing?.touched">
+            <ng-container *ngIf="daysAfterSowing?.hasError('required')">
+              This field is required
+            </ng-container>
+            <ng-container *ngIf="daysAfterSowing?.hasError('pattern')">
+              Only numbers are allowed
+            </ng-container>
+          </mat-error>
+          <!-- <mat-error *ngIf="scheduleForm.get('days_after_sowing')?.invalid" >
+            <ng-container *ngIf="scheduleForm.get('days_after_sowing')?.hasError('pattern')">
+              Only numbers are allowed
+            </ng-container>
+        
+          </mat-error> -->
         </mat-form-field>
   
         <mat-form-field appearance="fill">
           <mat-label>Quantity</mat-label>
           <input matInput formControlName="quantity" />
+          <mat-error *ngIf="quantity?.touched && quantity?.invalid">
+            <ng-container *ngIf="quantity?.errors?.['required']">
+              Quantity is required
+            </ng-container>
+            <ng-container *ngIf="quantity?.errors?.['pattern']">
+              Only numbers are allowed
+            </ng-container>
+          </mat-error>
         </mat-form-field>
   
         <mat-form-field appearance="fill">
@@ -52,20 +75,42 @@
         <mat-form-field appearance="fill">
           <mat-label>Fertilizer Price</mat-label>
           <input matInput formControlName="fertilizer_price" />
+          <mat-error *ngIf="fertilizerPrice?.touched && fertilizerPrice?.invalid">
+            <ng-container *ngIf="fertilizerPrice?.errors?.['required']">
+              Fertilizer price is required
+            </ng-container>
+            <ng-container *ngIf="fertilizerPrice?.errors?.['pattern']">
+              Only numbers are allowed
+            </ng-container>
+          </mat-error>
         </mat-form-field>
   
         <mat-form-field appearance="fill">
-          <mat-label>Fertilizer ID</mat-label>
-          <input matInput formControlName="fertilizer_id" />
+          <mat-label>Select Fertilizer</mat-label>
+          <mat-select formControlName="fertilizer_id">
+            <mat-option *ngFor="let fertilizer of fertilizersList" [value]="fertilizer.id">
+              {{ fertilizer.fertilizer_name }} 
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="scheduleForm.get('fertilizer_id')?.invalid && scheduleForm.get('fertilizer_id')?.touched">
+            Fertilizer is required
+          </mat-error>
         </mat-form-field>
   
         <mat-form-field appearance="fill">
-          <mat-label>Farm ID</mat-label>
-          <input matInput formControlName="farm_id" />
+          <mat-label>Select Farm</mat-label>
+          <mat-select formControlName="farm_id">
+            <mat-option *ngFor="let farm of farmsList" [value]="farm.id">
+              (ID: {{ farm.id }})
+            </mat-option>
+          </mat-select>
+          <!-- <mat-error *ngIf="scheduleForm.get('fertilizer_id')?.invalid && scheduleForm.get('fertilizer_id')?.touched">
+            Fertilizer is required
+          </mat-error> -->
         </mat-form-field>
   
         <div class="col-span-2">
-          <button class="submit-btn"type="submit" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded">
+          <button class="submit-btn"type="submit" >
             Submit
           </button>
         </div>
@@ -75,9 +120,20 @@
 
     <div class="form-popup" *ngIf="showByFarmForm" >
         <form class="form" [formGroup]="searchForm" (ngSubmit)="searchSchedulesByFarm()" >
-        <mat-form-field appearance="fill" class="w-full">
+        <!-- <mat-form-field appearance="fill" class="w-full">
         <mat-label>Farm ID</mat-label>
         <input matInput formControlName="farm_id" />
+      </mat-form-field> -->
+      <mat-form-field appearance="fill">
+        <mat-label>Select Farm</mat-label>
+        <mat-select formControlName="farm_id">
+          <mat-option *ngFor="let farm of farmsList" [value]="farm.id">
+            (ID: {{ farm.id }})
+          </mat-option>
+        </mat-select>
+        <!-- <mat-error *ngIf="scheduleForm.get('fertilizer_id')?.invalid && scheduleForm.get('fertilizer_id')?.touched">
+          Fertilizer is required
+        </mat-error> -->
       </mat-form-field>
       <button type="submit" class="submit-btn" >
         Search
@@ -89,9 +145,20 @@
     <div class="form-popup" *ngIf="showDueByFarmForm" >
         <form class="form" [formGroup]="dueForm" (ngSubmit)="searchDueSchedulesByFarm()" >
     
-      <mat-form-field appearance="fill" class="w-full">
+      <!-- <mat-form-field appearance="fill" class="w-full">
         <mat-label>Farm ID</mat-label>
         <input matInput formControlName="farm_id" />
+      </mat-form-field> -->
+      <mat-form-field appearance="fill">
+        <mat-label>Select Farm</mat-label>
+        <mat-select formControlName="farm_id">
+          <mat-option *ngFor="let farm of farmsList" [value]="farm.id">
+            (ID: {{ farm.id }})
+          </mat-option>
+        </mat-select>
+        <!-- <mat-error *ngIf="scheduleForm.get('fertilizer_id')?.invalid && scheduleForm.get('fertilizer_id')?.touched">
+          Fertilizer is required
+        </mat-error> -->
       </mat-form-field>
       <button class="submit-btn" type="submit" (click)="searchDueSchedulesByFarm()">
         Search
@@ -103,14 +170,36 @@
     <div class="form-popup" *ngIf="showBillForm" >
         <form class="form" [formGroup]="billForm" (ngSubmit)="searchBill()" >
     
-      <mat-form-field appearance="fill">
+      <!-- <mat-form-field appearance="fill">
         <mat-label>Farmer ID</mat-label>
         <input matInput formControlName="farmer_id"/>
+      </mat-form-field> -->
+      <mat-form-field appearance="fill">
+        <mat-label>Select Farmer</mat-label>
+        <mat-select formControlName="farmer_id">
+          <mat-option *ngFor="let farmer of farmersList" [value]="farmer.id">
+            {{ farmer.name }} 
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="scheduleForm.get('farmer_id')?.invalid && scheduleForm.get('farmer_id')?.touched">
+          Farmer is required
+        </mat-error>
       </mat-form-field>
   
-      <mat-form-field appearance="fill">
+      <!-- <mat-form-field appearance="fill">
         <mat-label>Farm ID</mat-label>
         <input matInput formControlName="farm_id" />
+      </mat-form-field> -->
+      <mat-form-field appearance="fill">
+        <mat-label>Select Farm</mat-label>
+        <mat-select formControlName="farm_id">
+          <mat-option *ngFor="let farm of farmsList" [value]="farm.id">
+            (ID: {{ farm.id }})
+          </mat-option>
+        </mat-select>
+        <!-- <mat-error *ngIf="scheduleForm.get('fertilizer_id')?.invalid && scheduleForm.get('fertilizer_id')?.touched">
+          Fertilizer is required
+        </mat-error> -->
       </mat-form-field>
   
       <div class="md:col-span-2">

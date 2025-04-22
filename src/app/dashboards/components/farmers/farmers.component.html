@@ -18,7 +18,7 @@
 
     <button class="crop-btn" mat-raised-button color="accent" (click)="getFarmersByCrop()">Farmers Growing Crop</button>
     <button class="all-btn"mat-raised-button color="warn" (click)="getAllFarmers()">Get All Farmers</button>
-
+    <button class="back-btn" mat-button (click)="goBack()">Back to Dashboard</button>
    
     <div class="form-popup" *ngIf="showForm">
       <form (ngSubmit)="onCreateFarmer()" [formGroup]="farmerForm">

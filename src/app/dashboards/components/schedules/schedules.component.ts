@@ -21,8 +21,11 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { ActivatedRoute } from '@angular/router';
-
+import { Router } from '@angular/router';
 import { QuantityUnitEnum, QuantityUnitDisplay } from '../quantity-unit.enum'; // adjust the path as needed
+import { FarmersService } from '../../../services/farmers.service';
+import { FarmService } from '../../../services/farm.service';
+import { FertilizerService } from '../../../services/fertilizer.service';
 @Component({
   selector: 'app-schedules',
   templateUrl: './schedules.component.html',
@@ -41,6 +44,9 @@ export class SchedulesComponent implements OnInit {
   billForm: FormGroup;
   schedules: any[] = [];
   dueschedules: any[] = [];
+  fertilizersList: any[] = [];
+  farmersList: any[] = [];
+  farmsList: any[] = [];
   displayedColumns: string[] = ['days_after_sowing', 'quantity', 'quantity_unit', 'fertilizer_price', 'fertilizer_id', 'farm_id'];
   showCreateForm = false;
 showByFarmForm = false;
@@ -63,13 +69,13 @@ farmIdForBill: number=0;
   constructor(
     private fb: FormBuilder,
     private schedulesService: SchedulesService,
-    private authService: AuthService,private route: ActivatedRoute,
+    private authService: AuthService,private route: ActivatedRoute, private router:Router, private fertilizerService: FertilizerService,private farmerService :FarmersService,private farmService :FarmService
   ) {
     this.scheduleForm = this.fb.group({
-      days_after_sowing: ['', Validators.required],
-      quantity: ['', Validators.required],
+      days_after_sowing: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
+      quantity: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       quantity_unit: ['', Validators.required],
-      fertilizer_price: ['', Validators.required],
+      fertilizer_price: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       fertilizer_id: ['', Validators.required],
       farm_id: ['', Validators.required]
     });
@@ -126,12 +132,51 @@ farmIdForBill: number=0;
         });
       }
     });
+    this.fertilizerService.getAllFertilizers().subscribe({
+      next: (res) => {
+        this.fertilizersList = res|| [];
+      },
+      error: (err) => {
+        console.error('Failed to load fertilizers:', err);
+      }
+    });
+    this.farmerService.getAllFarmers().subscribe({
+      next: (res) => {
+        this.farmersList = res.farmers|| [];
+      },
+      error: (err) => {
+        console.error('Failed to load farmers:', err);
+      }
+    });
+    this.farmService.getAllFarms().subscribe({
+      next: (res) => {
+        this.farmsList = res.farms|| [];
+      },
+      error: (err) => {
+        console.error('Failed to load farms:', err);
+      }
+    });
+  
   }
 
   goBack() {
-    window.history.back();
+    this.router.navigate(['farms']);
   }
-  
+  // onlyNumberKey(event: KeyboardEvent) {
+  //   const charCode = event.which ? event.which : event.keyCode;
+  //   if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+  //     event.preventDefault();
+  //   }
+  // }
+  get daysAfterSowing() {
+    return this.scheduleForm.get('days_after_sowing');
+  }
+  get quantity() {
+    return this.scheduleForm.get('quantity');
+  }
+  get fertilizerPrice() {
+    return this.scheduleForm.get('fertilizer_price');
+  }
 
   getAllSchedules(): void {
     this.schedulesService.getAllSchedules().subscribe({

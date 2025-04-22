@@ -40,9 +40,20 @@
         <input matInput formControlName="country" required />
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
+      <!-- <mat-form-field appearance="fill">
         <mat-label>Farmer ID</mat-label>
         <input matInput formControlName="farmer_id" required />
+      </mat-form-field> -->
+      <mat-form-field appearance="fill">
+        <mat-label>Select Farmer</mat-label>
+        <mat-select formControlName="farmer_id">
+          <mat-option *ngFor="let farmer of farmersList" [value]="farmer.id">
+            {{ farmer.name }} 
+          </mat-option>
+        </mat-select>
+        <!-- <mat-error *ngIf="scheduleForm.get('farmer_id')?.invalid && scheduleForm.get('farmer_id')?.touched">
+          Farmer is required
+        </mat-error> -->
       </mat-form-field>
 
       <mat-form-field appearance="fill">
@@ -55,13 +66,30 @@
       <button class="submit-btn" mat-flat-button color="accent" type="submit">Submit</button>
     </form>
   </div>
-
+<!-- 
   <div class="form-popup" *ngIf="showbyFarmer">
   <form class="form" [formGroup]="farmerIdForm" (ngSubmit)="onGetFarmsByFarmer()">
     <input formControlName="farmer_id" placeholder="Farmer ID">
     <button class="submit" type="submit" mat-button color="accent">Search</button>
   </form>
-  </div>
+  </div> -->
+  <div class="form-popup" *ngIf="showbyFarmer" >
+    <form class="form" [formGroup]="farmerIdForm" (ngSubmit)="onGetFarmsByFarmer()" >
+      <mat-form-field appearance="fill">
+        <mat-label>Select Farmer</mat-label>
+        <mat-select formControlName="farmer_id">
+          <mat-option *ngFor="let farmer of farmersList" [value]="farmer.id">
+            {{ farmer.name }} 
+          </mat-option>
+        </mat-select>
+        
+      </mat-form-field>
+  <button  class="submit" type="submit" class="submit-btn" >
+    Search
+  </button>
+  </form>
+</div>
+
   
   
    <table mat-table [dataSource]="farms" class="mat-elevation-z4 farmers-table" *ngIf="farms.length">

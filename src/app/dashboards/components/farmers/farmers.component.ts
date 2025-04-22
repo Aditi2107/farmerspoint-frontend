@@ -111,6 +111,21 @@ console.log("Is Array?", Array.isArray(res));
       console.warn('Form is invalid');
     }
   }
+  goBack() {
+    // this.router.navigate(['farmers']);
+    const role = localStorage.getItem('role');
+
+    if (role === 'admin') {
+      this.router.navigate(['/admin-dashboard']);
+    } else if (role === 'super') {
+      this.router.navigate(['/superuser-dashboard']);
+    } else if (role === 'user') {
+      this.router.navigate(['/user-dashboard']);
+    } else {
+      // fallback if role isn't found
+      this.router.navigate(['/login']);
+    }
+  }
   getFarmersByCrop(): void {
     this.farmerService.getFarmersByCrop().subscribe({
       next: (res) => {

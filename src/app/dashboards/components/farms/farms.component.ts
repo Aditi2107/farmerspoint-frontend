@@ -13,7 +13,9 @@ import { ApiService } from '../../../services/api.service';
 import { AuthService } from '../../../services/auth.service';
 import { CommonModule } from '@angular/common'; 
 
-
+import { FarmersService } from '../../../services/farmers.service';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
@@ -22,12 +24,14 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-farms',
-  imports: [CommonModule,MatFormFieldModule,MatInputModule,MatTableModule,ReactiveFormsModule,MatDatepickerModule,MatNativeDateModule],
+  imports: [CommonModule,MatFormFieldModule,MatInputModule,MatTableModule,ReactiveFormsModule,MatDatepickerModule,MatNativeDateModule,MatSelectModule,MatOptionModule],
 templateUrl: './farms.component.html',
 styleUrls: ['./farms.component.css']
 })
 export class FarmsComponent implements OnInit {
   farms: any[] = [];
+  farmersList: any[] = [];
+  
   farmForm: FormGroup;
   farmerIdForm: FormGroup;
   showCreateFarmForm = false;
@@ -37,7 +41,7 @@ export class FarmsComponent implements OnInit {
 
   constructor(private ApiService: ApiService,
     private authService: AuthService,
-    private dialog: MatDialog,private fb: FormBuilder, private farmService: FarmService,private route: ActivatedRoute, private router:Router) {
+    private dialog: MatDialog,private fb: FormBuilder, private farmService: FarmService,private route: ActivatedRoute, private router:Router,private farmerService :FarmersService) {
     this.farmForm = this.fb.group({
      
       area: [''],
@@ -69,9 +73,17 @@ export class FarmsComponent implements OnInit {
         this.getAllFarms(); // or leave blank
       }
     });
+    this.farmerService.getAllFarmers().subscribe({
+      next: (res) => {
+        this.farmersList = res.farmers|| [];
+      },
+      error: (err) => {
+        console.error('Failed to load farmers:', err);
+      }
+    });
   }
   goBack() {
-    window.history.back();
+    this.router.navigate(['farmers']);
   }
   
 

@@ -10,6 +10,7 @@ import { AdminDashboardComponent } from './dashboards/admin-dashboard/admin-dash
 import { SuperuserDashboardComponent } from './dashboards/superuser-dashboard/superuser-dashboard.component';
 import { UserDashboardComponent } from './dashboards/user-dashboard/user-dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
+import { FarmersComponent } from './dashboards/components/farmers/farmers.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -17,6 +18,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'farms', component: FarmsComponent },
   { path: 'schedules', component: SchedulesComponent },
+  { path: 'farmers', component: FarmersComponent },
   // { path: 'admin-dashboard', component: AdminDashboardComponent },
   // { path: 'superuser-dashboard', component: SuperuserDashboardComponent },
   // { path: 'user-dashboard', component: UserDashboardComponent },
